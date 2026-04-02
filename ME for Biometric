@@ -1,3 +1,370 @@
-Medical Equipment which does Biometric for Medlife.
+Medical Biometric Equipment for New Employee Onboarding – MedLife
+
+SYSTEM ANALYSIS & DESIGN (SAD)
 
 
+1️⃣ PROJECT OVERVIEW
+To securely onboard new employees at MedLife company, a Biometric Medical Equipment System has been designed.
+This system captures employees’ biometric data (fingerprint / face – simulated), stores it securely, and uses it for future verification purposes.
+
+
+2️⃣ REQUIREMENT ANALYSIS
+🔹 Purpose
+
+Capture biometric data of new employees
+Ensure secure storage and verification
+Automate the manual onboarding process
+
+🔹 Functional Requirements
+(What the system will do)
+
+HR can register a new employee
+The system accepts biometric data (simulated)
+Data is encrypted and stored in the database
+An Employee ID is generated
+HR can verify employee details
+
+🔹 Non‑Functional Requirements
+(System behavior)
+
+Security (encrypted data)
+Accuracy
+Fast response time
+Data privacy
+Scalability (for future employees)
+
+
+3️⃣ ANALYSIS
+✅ Identify Needs
+MedLife requires:
+
+Prevention of duplicate employee records
+A secure onboarding process
+Medical‑grade biometric compliance
+A centralized employee identity system
+
+✅ Software Analysis
+Since real hardware is not available:
+
+Software‑based biometric simulation will be used
+Dummy biometric data (hash / token)
+Console / Web / Java‑based application
+
+
+4️⃣ DESIGN PHASE
+4️⃣.1 SYSTEM DESIGN (High Level)
+Actors:
+
+HR Admin
+Employee
+
+Modules:
+
+Registration Module
+Biometric Capture Module
+Verification Module
+Database Module
+
+
+4️⃣.2 FLOWCHART (Visual Representation)
+
+
+                ┌─────────────┐
+                │   START     │
+                └──────┬──────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │   HR Login      │
+              └──────┬──────────┘
+                       │
+                       ▼
+        ┌─────────────────────────┐
+        │ New Employee Registration│
+        └──────┬──────────────────┘
+                       │
+                       ▼
+        ┌─────────────────────────┐
+        │ Enter Employee Details  │
+        │ (Name, Dept, DOJ etc.)  │
+        └──────┬──────────────────┘
+                       │
+                       ▼
+        ┌─────────────────────────┐
+        │ Biometric Capture       │
+        │ (Simulated Scan)        │
+        └──────┬──────────────────┘
+                       │
+                       ▼
+        ┌─────────────────────────┐
+        │ Validate Biometric Data │
+        └──────┬──────────────────┘
+                       │
+              ┌────────▼─────────┐
+              │ Valid?            │
+              └──────┬───────┬───┘
+                     │Yes    │No
+                     │       │
+                     ▼       ▼
+    ┌─────────────────────────┐   ┌─────────────────────┐
+    │ Encrypt Biometric Data  │   │ Re-scan Biometric   │
+    └──────┬──────────────────┘   └─────────┬───────────┘
+            │                                │
+            ▼                                │
+    ┌─────────────────────────┐            │
+    │ Store Data in Database  │◄───────────┘
+    └──────┬──────────────────┘
+            │
+            ▼
+    ┌────────────────────────────┐
+    │ Generate Employee ID       │
+    └──────┬─────────────────────┘
+            │
+            ▼
+    ┌────────────────────────────┐
+    │ Display Confirmation       │
+    └──────┬─────────────────────┘
+            │
+            ▼
+         ┌──────────┐
+         │   END    │
+         └──────────┘
+
+
+4️⃣.3 DATABASE MODULE DESIGN
+Table: Employee
+
+Field Name            Description
+emp_id                Unique Employee ID
+emp_name              Employee Name
+biometric_hash        Encrypted biometric data
+department            Department
+date_of_joining       DOJ
+
+
+4️⃣.4 UML / OOAD (Conceptual)
+🔹 Class Diagram (Explain in words)
+Class: Employee
+
+empId
+name
+department
+biometricHash
+
+Class: BiometricSystem
+
+captureBiometric()
+encryptData()
+verifyBiometric()
+
+Class: HRAdmin
+
+registerEmployee()
+approveEmployee()
+
+
+5️⃣ CODING PHASE
+
+"javac MedLifeBiometricSystem.java
+java MedLifeBiometricSystem"
+
+
+import java.util.*;
+
+/*
+ Project Title:
+ Smart Biometric Medical Equipment for Employee Onboarding – MedLife
+
+ Description:
+ Software-based simulation of a medical biometric system
+ for onboarding newly hired employees.
+*/
+
+// ======================= Employee Class =======================
+class Employee {
+    private int empId;
+    private String name;
+    private String department;
+    private String biometricHash;
+
+    public Employee(int empId, String name, String department, String biometricHash) {
+        this.empId = empId;
+        this.name = name;
+        this.department = department;
+        this.biometricHash = biometricHash;
+    }
+
+    public int getEmpId() {
+        return empId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getBiometricHash() {
+        return biometricHash;
+    }
+}
+
+// ======================= Biometric System Class =======================
+class BiometricSystem {
+
+    // Simulated biometric capture
+    public String captureBiometric(String biometricInput) {
+        return encryptBiometric(biometricInput);
+    }
+
+    // Encrypt biometric using hashCode (simulation)
+    private String encryptBiometric(String input) {
+        return Integer.toString(input.hashCode());
+    }
+
+    // Verification
+    public boolean verifyBiometric(String input, String storedHash) {
+        String inputHash = encryptBiometric(input);
+        return inputHash.equals(storedHash);
+    }
+}
+
+// ======================= HR Admin Class =======================
+class HRAdmin {
+    private Map<Integer, Employee> employeeDatabase = new HashMap<>();
+    private BiometricSystem biometricSystem = new BiometricSystem();
+    private int empCounter = 1000;
+
+    // Register new employee
+    public Employee registerEmployee(String name, String department, String biometricData) {
+        empCounter++;
+        String biometricHash = biometricSystem.captureBiometric(biometricData);
+        Employee employee = new Employee(empCounter, name, department, biometricHash);
+        employeeDatabase.put(empCounter, employee);
+
+        System.out.println("✅ Employee Registered Successfully");
+        System.out.println("Generated Employee ID: " + empCounter);
+        return employee;
+    }
+
+    // Verify employee biometric
+    public boolean approveEmployee(int empId, String biometricInput) {
+        Employee emp = employeeDatabase.get(empId);
+
+        if (emp == null) {
+            System.out.println("❌ Employee not found");
+            return false;
+        }
+
+        boolean status = biometricSystem.verifyBiometric(
+                biometricInput,
+                emp.getBiometricHash()
+        );
+
+        if (status) {
+            System.out.println("✅ Biometric Verified. Employee Approved.");
+            return true;
+        } else {
+            System.out.println("❌ Biometric Verification Failed.");
+            return false;
+        }
+    }
+
+    // Display all employees
+    public void displayEmployees() {
+        System.out.println("\n---- Employee Database ----");
+        for (Employee e : employeeDatabase.values()) {
+            System.out.println(
+                "ID: " + e.getEmpId() +
+                " | Name: " + e.getName() +
+                " | Dept: " + e.getDepartment()
+            );
+        }
+    }
+}
+
+// ======================= Testing + Implementation =======================
+public class MedLifeBiometricSystem {
+
+    public static void main(String[] args) {
+
+        System.out.println("=== MedLife Biometric Medical Equipment System ===\n");
+
+        HRAdmin hrAdmin = new HRAdmin();
+
+        // -------- TEST CASE 1: Register Employee --------
+        Employee emp1 = hrAdmin.registerEmployee(
+                "Ayush Thakur",
+                "IT",
+                "fingerprint_ayush"
+        );
+
+        // -------- TEST CASE 2: Correct Biometric Verification --------
+        boolean test1 = hrAdmin.approveEmployee(
+                emp1.getEmpId(),
+                "fingerprint_ayush"
+        );
+
+        // -------- TEST CASE 3: Incorrect Biometric Verification --------
+        boolean test2 = hrAdmin.approveEmployee(
+                emp1.getEmpId(),
+                "wrong_fingerprint"
+        );
+
+        // -------- TEST CASE 4: Invalid Employee ID --------
+        boolean test3 = hrAdmin.approveEmployee(
+                9999,
+                "fingerprint"
+        );
+
+        // -------- Display Database --------
+        hrAdmin.displayEmployees();
+
+        // -------- Final Test Result --------
+        System.out.println("\n=== TEST SUMMARY ===");
+        System.out.println("Valid Biometric Test: " + (test1 ? "PASSED ✅" : "FAILED ❌"));
+        System.out.println("Invalid Biometric Test: " + (!test2 ? "PASSED ✅" : "FAILED ❌"));
+        System.out.println("Invalid Employee Test: " + (!test3 ? "PASSED ✅" : "FAILED ❌"));
+
+        System.out.println("\n✅ System Implementation Completed Successfully");
+    }
+}
+
+
+6️⃣ TESTING PHASE
+✅ Testing Types Used
+🔹 Unit Testing
+
+Employee registration works?
+Biometric capture works?
+
+🔹 Integration Testing
+
+Database + biometric module connected?
+
+🔹 User Acceptance Testing
+
+HR can register and verify employee ✅
+
+✅ Test Cases Example
+
+Test Case             Input            Expected Output
+Valid biometric       Correct data     Registration success
+Invalid biometric     Wrong data       Verification failed
+
+7️⃣ IMPLEMENTATION PHASE
+✅ Application is deployed as:
+
+Console application / local system
+HR uses it during onboarding
+
+
+✅ Implementation Steps
+
+Install Java / Python
+Run application
+HR logs in
+Employee onboarding starts
+Data stored locally
