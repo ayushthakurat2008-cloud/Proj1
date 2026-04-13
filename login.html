@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Ayush Thakur</title>
+  <link rel="stylesheet" href="Hello.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="navbar">
+      <div class="brand">Ayush Thakur</div>
+      <div class="nav-links">
+        <div class="dropdown">
+          <button class="dropbtn" type="button">Menu</button>
+          <div class="dropdown-content">
+            <a href="Hello.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Signup</a>
+          </div>
+        </div>
+        <a class="nav-link" href="Hello.html">Home</a>
+        <a class="nav-link" href="signup.html">Signup</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <h1>Login</h1>
+      <p>Enter your credentials to access the secure area of Ayush Thakur's site.</p>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <h2>Login Form</h2>
+      <form class="form-card" action="#" method="post">
+        <label>
+          Email
+          <input type="email" name="email" placeholder="your@email.com" required />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" placeholder="Enter your password" required />
+        </label>
+        <button type="submit">Login</button>
+      </form>
+      <p class="form-link">Don't have an account? <a href="signup.html">Sign up here</a></p>
+    </section>
+  </main>
+</body>
+</html>
