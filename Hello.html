@@ -1,50 +1,71 @@
-<html>
-  <head>
-    <link rel="stylesheet" href="Hello.css"/>
-  </head>
-  <head>
-    <script src="Hello.js"></script>
-  </head>
-  <body>
-    <button onclick="clickme()">Click Here</button>
-    <h1>      
-      H-Hyper : Being Super Interactive (HTML is very interactive as it canb be executed in any browser,
-      and get the data from anywhere in the web
-      <ul> Some features of HTML which make it hyper:
-        <li>Anchor tag "a"</li>
-        <li>Forms</li>
-      </ul>
-      <br>
-      T-Text:
-      in HTML Text means any visible component in a web page. These reside in the body of the page.
-      Text can be plain text, images, video, links, tables, etc
-      <br>
-      M-Markup : In HTML the tags and styling are major part that describe the metadata of the page.
-      Markup in English means formatting. We do formatting in a web page woth the help of tags and CSS
-      <br>
-      L-Language : All computer languages have common features of having:
-      <br>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello Page</title>
+  <link rel="stylesheet" href="Hello.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="navbar">
+      <div class="brand">Hello Web</div>
+      <div class="nav-links">
+        <div class="dropdown">
+          <button class="dropbtn" type="button">Menu</button>
+          <div class="dropdown-content">
+            <a href="#overview">Overview</a>
+            <a href="#features">Features</a>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Signup</a>
+          </div>
+        </div>
+        <a class="nav-link" href="login.html">Login</a>
+        <a class="nav-link" href="signup.html">Signup</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <h1>H-Hyper: Being Super Interactive</h1>
+      <p>
+        HTML is very interactive and can be executed in any browser. Use this page to explore the
+        dropdown menu, background styling, and navigation to login/signup forms.
+      </p>
+      <button onclick="clickme()">Click Here</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section id="overview" class="card">
+      <h2>What is HTML?</h2>
+      <p>
+        HTML is the language of the web. It provides structure for text, images, links, tables,
+        forms and more.
+      </p>
+    </section>
+
+    <section id="features" class="card">
+      <h2>Key Features</h2>
       <ul>
-        <li>Variables: placeholders to actual value</li>
-        <li>Statements: lines of codes, like sentences</li>
-        <li>Control structires: if..else if.. else, switch case</li>
-        <li>Loops: repeatative structures</li>
-        <li>Functions: group of statements solving a particular problem</li>
+        <li>Anchor tag <code>&lt;a&gt;</code> for navigation</li>
+        <li>Forms for login and signup</li>
+        <li>Dropdown menus for quick access</li>
+        <li>CSS background colors and page styling</li>
       </ul>
-      In HTML we have javascript handling the language part.
-    </h1>
-    <h2>
-      CSS:
-      Cascading: following the HTML files
-      Style: style the HTML content
-      Sheet: the place where we write the style code
-    </h2>
-    <h2>
-      JS: Javascript is the language behind HTML
-    </h2>
-    <h2>
-      TS: Typescript is the new language which is strongly typed 
-      TS gets compiled into JS and then executed in HTML.
-    </h2>
-  </body>
+    </section>
+
+    <section class="card">
+      <h2>HTML, CSS and JavaScript</h2>
+      <p>
+        HTML provides the page structure, CSS adds color and layout, and JavaScript adds interactivity.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Want to try forms? Open the login or signup pages from the navigation above.</p>
+  </footer>
+
+  <script src="Hello.js"></script>
+</body>
 </html>
