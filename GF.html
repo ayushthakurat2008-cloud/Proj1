@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Valentine Proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: slideIn 0.8s ease-in-out;
+        }
+
+        .page.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Page 1 - Welcome */
+        #page1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #page1 h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #page1 .heart {
+            font-size: 3em;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Page 2 - About */
+        #page2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        #page2 .content {
+            max-width: 600px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        #page2 h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #page2 p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Page 3 - Memories */
+        #page3 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #333;
+            padding: 40px;
+        }
+
+        #page3 .memories-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        #page3 h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #f5576c;
+            text-align: center;
+        }
+
+        .memory-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f0f0f0;
+            border-left: 4px solid #f5576c;
+            border-radius: 5px;
+        }
+
+        .memory-item strong {
+            color: #f5576c;
+        }
+
+        /* Page 4 - Why I Love You */
+        #page4 {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        #page4 .reasons {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+
+        #page4 h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .reason {
+            font-size: 1.1em;
+            margin: 15px 0;
+            line-height: 1.6;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Page 5 - Timeline */
+        #page5 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #333;
+            padding: 40px;
+        }
+
+        #page5 .timeline {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        #page5 h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #4facfe;
+        }
+
+        .timeline-item {
+            margin: 20px 0;
+            padding-left: 30px;
+            border-left: 3px solid #4facfe;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #4facfe;
+            border-radius: 50%;
+        }
+
+        .timeline-item strong {
+            color: #4facfe;
+            font-size: 1.1em;
+        }
+
+        /* Page 6 - Gallery */
+        #page6 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px;
+        }
+
+        #page6 .gallery {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        #page6 h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .gallery-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            font-size: 3em;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.1);
+        }
+
+        /* Page 7 - Feelings */
+        #page7 {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        #page7 .feelings-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+
+        #page7 h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #page7 p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Page 8 - Proposal */
+        #page8 {
+            background: linear-gradient(135deg, #ee7752 0%, #e73c7e 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #page8 .proposal-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 60px 40px;
+            border-radius: 20px;
+            max-width: 700px;
+            backdrop-filter: blur(10px);
+        }
+
+        #page8 h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            animation: pulse 1.5s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        #page8 .question {
+            font-size: 2em;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .yes-btn, .no-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes-btn {
+            background: #4CAF50;
+            color: white;
+            min-width: 150px;
+        }
+
+        .yes-btn:hover {
+            background: #45a049;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .no-btn {
+            background: #f44336;
+            color: white;
+            min-width: 150px;
+            position: relative;
+        }
+
+        .no-btn:hover {
+            left: 100px;
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 2px solid white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            font-weight: bold;
+        }
+
+        .success-message {
+            font-size: 2em;
+            margin-top: 30px;
+            animation: bounce 0.6s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page 1: Welcome -->
+        <div class="page active" id="page1">
+            <h1>💕 Happy Valentine's Day 💕</h1>
+            <p style="font-size: 1.5em; margin-top: 20px;">A Special Message for You</p>
+            <div class="heart">❤️</div>
+        </div>
+
+        <!-- Page 2: About You -->
+        <div class="page" id="page2">
+            <div class="content">
+                <h2>About You</h2>
+                <p>
+                    You are the most amazing person I know. Your smile brightens my darkest days, and your presence makes everything feel right. You've brought so much love and joy into my life that I can't imagine living without you.
+                </p>
+            </div>
+        </div>
+
+        <!-- Page 3: Our Memories -->
+        <div class="page" id="page3">
+            <div class="memories-box">
+                <h2>Our Beautiful Memories</h2>
+                <div class="memory-item">
+                    <strong>First Meeting:</strong> The day I saw you, my heart skipped a beat!
+                </div>
+                <div class="memory-item">
+                    <strong>First Coffee:</strong> Talking for hours and losing track of time.
+                </div>
+                <div class="memory-item">
+                    <strong>Adventure Time:</strong> Every moment with you becomes an adventure.
+                </div>
+                <div class="memory-item">
+                    <strong>Late Night Talks:</strong> Your dreams and stories inspire me daily.
+                </div>
+                <div class="memory-item">
+                    <strong>Forever Moments:</strong> Every moment with you feels like forever.
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 4: Why I Love You -->
+        <div class="page" id="page4">
+            <div class="reasons">
+                <h2>Why I Love You</h2>
+                <div class="reason">✨ Your beautiful smile</div>
+                <div class="reason">💪 Your strength and courage</div>
+                <div class="reason">🎵 Your laughter that fills my heart</div>
+                <div class="reason">🧠 Your intelligence and wisdom</div>
+                <div class="reason">💖 Your kind and compassionate heart</div>
+                <div class="reason">🌟 The way you make me a better person</div>
+            </div>
+        </div>
+
+        <!-- Page 5: Our Timeline -->
+        <div class="page" id="page5">
+            <div class="timeline">
+                <h2>Our Timeline</h2>
+                <div class="timeline-item">
+                    <strong>Day 1:</strong> We met and the world changed forever
+                </div>
+                <div class="timeline-item">
+                    <strong>First Date:</strong> I knew you were special
+                </div>
+                <div class="timeline-item">
+                    <strong>First Kiss:</strong> My heart was completely yours
+                </div>
+                <div class="timeline-item">
+                    <strong>Growing Together:</strong> Every day with you is a blessing
+                </div>
+                <div class="timeline-item">
+                    <strong>Today:</strong> The most important day of my life
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 6: Special Moments Gallery -->
+        <div class="page" id="page6">
+            <div class="gallery">
+                <h2>Our Special Moments</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">🌹</div>
+                    <div class="gallery-item">💑</div>
+                    <div class="gallery-item">🎉</div>
+                    <div class="gallery-item">🌙</div>
+                    <div class="gallery-item">🎂</div>
+                    <div class="gallery-item">🎁</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 7: My Feelings -->
+        <div class="page" id="page7">
+            <div class="feelings-box">
+                <h2>How You Make Me Feel</h2>
+                <p>
+                    You are my greatest adventure, my safest place, and my happiest thought. With you, I've found a love that's pure and true. Every moment spent with you is a treasure, and every memory is etched in my heart forever. You've shown me what real love means.
+                </p>
+            </div>
+        </div>
+
+        <!-- Page 8: The Big Question -->
+        <div class="page" id="page8">
+            <div class="proposal-box">
+                <h2>💍 Will You Marry Me? 💍</h2>
+                <div class="question">
+                    I want to spend the rest of my life with you!
+                </div>
+                <div class="button-group">
+                    <button class="yes-btn" onclick="yesClicked()">YES! 💕</button>
+                    <button class="no-btn" onclick="noClicked()">No</button>
+                </div>
+                <div id="successMsg"></div>
+            </div>
+        </div>
+
+        <!-- Page Counter -->
+        <div class="page-counter">
+            <span id="currentPage">1</span> / 8
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="btn" id="prevBtn" onclick="previousPage()">← Previous</button>
+            <button class="btn" id="nextBtn" onclick="nextPage()">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 8;
+
+        function showPage(pageNum) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show the current page
+            const pageId = 'page' + pageNum;
+            document.getElementById(pageId).classList.add('active');
+
+            // Update page counter
+            document.getElementById('currentPage').textContent = pageNum;
+
+            // Update button states
+            document.getElementById('prevBtn').disabled = pageNum === 1;
+            document.getElementById('nextBtn').disabled = pageNum === totalPages;
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+
+        function yesClicked() {
+            const successMsg = document.getElementById('successMsg');
+            successMsg.innerHTML = '<div class="success-message">🎉 You\'ve made me the happiest person! 🎉</div>';
+            document.querySelector('.yes-btn').textContent = 'FOREVER! 💕';
+            document.querySelector('.yes-btn').disabled = true;
+            document.querySelector('.no-btn').style.display = 'none';
+        }
+
+        function noClicked() {
+            const noBtn = document.querySelector('.no-btn');
+            const randomX = Math.floor(Math.random() * 200) - 100;
+            const randomY = Math.floor(Math.random() * 200) - 100;
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                nextPage();
+            } else if (event.key === 'ArrowLeft') {
+                previousPage();
+            }
+        });
+
+        // Initialize
+        showPage(1);
+    </script>
+</body>
+</html>
